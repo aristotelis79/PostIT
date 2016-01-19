@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - PostIT</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("PostIT", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink(PostIT.LocalResource.Resources.Home, "Index", "Home")</li>
+                    <li>@Html.ActionLink(PostIT.LocalResource.Resources.About, "About", "Home")</li>
+                    <li>@Html.ActionLink(PostIT.LocalResource.Resources.Contact, "Contact", "Home")</li>
+                    <li>@Html.ActionLink(PostIT.LocalResource.Resources.Articles, "Index", "Articles")</li>
+                </ul>
+                <div class="nav navbar-nav navbar-right dropdown">
+                    <button class="btn btn-default dropdown-toggle .btn-block .btn-lg" type="button" data-toggle="dropdown">Languages
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        @*<li>Html.ActionLink("English", ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), new { language = "en-US" }, null)</li>
+                        <li>Html.ActionLink("Greek", ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), new { language = "el-GR" }, null)</li>*@
+                        <li>@Html.ActionLink("English", "ChangeLanguage", ViewContext.RouteData.Values["controller"].ToString(), new { language = "en-US", redirectUrl = HttpContext.Current.Request.Url.AbsolutePath }, null)</li>
+                        <li>@Html.ActionLink("Greek", "ChangeLanguage", ViewContext.RouteData.Values["controller"].ToString(), new { language = "el-GR", redirectUrl = HttpContext.Current.Request.Url.AbsolutePath }, null)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - PostIT</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
