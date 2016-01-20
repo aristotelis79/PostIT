@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@PostIT.LocalResource.Resources.Details</h2>
 
 <div>
-    <h4>Article</h4>
+    <h4>@PostIT.LocalResource.Resources.Article</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -68,6 +68,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(PostIT.LocalResource.Resources.Edit, "Edit", new { id = Model.ID }) |
+    @Html.ActionLink(PostIT.LocalResource.Resources.BacktoList, "Index")
 </p>

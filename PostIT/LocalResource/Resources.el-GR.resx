@@ -120,8 +120,14 @@
   <data name="About" xml:space="preserve">
     <value>Σχετικά</value>
   </data>
+  <data name="Article" xml:space="preserve">
+    <value>Άρθρο</value>
+  </data>
   <data name="Articles" xml:space="preserve">
     <value>Άρθρα</value>
+  </data>
+  <data name="BacktoList" xml:space="preserve">
+    <value>Πίσω στη λίστα</value>
   </data>
   <data name="Category" xml:space="preserve">
     <value>Κατηγορία</value>
@@ -132,14 +138,44 @@
   <data name="Content" xml:space="preserve">
     <value>Περιεχόμενο</value>
   </data>
+  <data name="Create" xml:space="preserve">
+    <value>Δημιουργία</value>
+  </data>
   <data name="Created" xml:space="preserve">
     <value>Δημιουργήθηκε</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Διαγραφή</value>
+  </data>
+  <data name="DeleteThis" xml:space="preserve">
+    <value>Σιγουρα θέλεις να το διαγράξεις</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Λεπτομέριες</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Επεξεργασία</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Αγγλικά</value>
+  </data>
+  <data name="Greek" xml:space="preserve">
+    <value>Ελληνικά</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Αρχική</value>
   </data>
+  <data name="Index" xml:space="preserve">
+    <value>Περιεχόμενα</value>
+  </data>
+  <data name="Languages" xml:space="preserve">
+    <value>Γλώσσες</value>
+  </data>
   <data name="Modified" xml:space="preserve">
     <value>Τροποποιήθηκε</value>
+  </data>
+  <data name="NewTag" xml:space="preserve">
+    <value>Νέα Κατηγορία</value>
   </data>
   <data name="Published" xml:space="preserve">
     <value>Δημοσιευθηκε</value>

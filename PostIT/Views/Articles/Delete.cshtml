@@ -4,11 +4,11 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>@PostIT.LocalResource.Resources.Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>@PostIT.LocalResource.Resources.DeleteThis</h3>
 <div>
-    <h4>Article</h4>
+    <h4>@PostIT.LocalResource.Resources.Article</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -73,7 +73,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink(PostIT.LocalResource.Resources.BacktoList, "Index")
         </div>
     }
 </div>
