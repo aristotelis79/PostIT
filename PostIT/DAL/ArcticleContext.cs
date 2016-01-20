@@ -16,7 +16,7 @@ namespace PostIT.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-           // modelBuilder.Entity<Article>().HasMany(c => c.Tags).WithMany(i => i.Articles).Map(t => t.MapLeftKey("ArticleID").MapRightKey("TagID").ToTable("ArticleTag"));
+            // modelBuilder.Entity<Article>().HasMany(c => c.Tags).WithMany(i => i.Articles).Map(t => t.MapLeftKey("ArticleID").MapRightKey("TagID").ToTable("ArticleTag"));
         }
     }
 }

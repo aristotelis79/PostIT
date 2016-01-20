@@ -56,10 +56,9 @@ C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\bin\Sys
 C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\bin\System.Web.WebPages.Razor.xml
 C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\PostIT.LocalResource.Resources.resources
+C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\PostIT.Migrations.init.resources
 C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\PostIT.LocalResource.Resources.el-GR.resources
 C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\PostIT.csproj.GenerateResource.Cache
 C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\el-GR\PostIT.resources.dll
 C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\PostIT.dll
 C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\PostIT.pdb
-C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\PostIT.Migrations.init.resources
-C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\PostIT.csprojResolveAssemblyReference.cache

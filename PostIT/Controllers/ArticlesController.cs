@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PostIT.DAL;
+using PostIT.Models;
+using System;
 using System.Data;
-using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using PostIT.DAL;
-using PostIT.Models;
-using System.Threading;
-using System.Globalization;
 
 namespace PostIT.Controllers
 {
@@ -24,7 +20,7 @@ namespace PostIT.Controllers
         }
 
         // GET: Articles/Details/5
-        public ActionResult Details(int? id )
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -41,15 +37,16 @@ namespace PostIT.Controllers
         // GET: Articles/Create
         public ActionResult Create()
         {
+            TagsDropDownList();
             return View();
         }
 
         // POST: Articles/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Content,ShortDescription,Created,Modified,Published,Category")] Article article )
+        public ActionResult Create([Bind(Include = "ID,Title,Content,ShortDescription,Created,Modified,Published,CategoryID")] Article article)
         {
             if (ModelState.IsValid)
             {
@@ -58,12 +55,12 @@ namespace PostIT.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            TagsDropDownList(article.CategoryID);
             return View(article);
         }
 
         // GET: Articles/Edit/5
-        public ActionResult Edit(int? id )
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -74,29 +71,41 @@ namespace PostIT.Controllers
             {
                 return HttpNotFound();
             }
-            TagsDropDownList(db.Tags.Find(id).ID);
+            TagsDropDownList(article.CategoryID);
             return View(article);
         }
 
         // POST: Articles/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Content,ShortDescription,Created,Modified,Published,Category")] Article article )
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                article.Modified = DateTime.Now;
-                db.Entry(article).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var article = db.Articles.Find(id);
+            if (TryUpdateModel(article, "", new string[] { "Title", "Content", "ShortDescription", "Created", "Modified", "Published", "CategoryID" }))
+            {
+                try
+                {
+                    article.Modified = DateTime.Now;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes");
+                }
+            }
+            TagsDropDownList(article.CategoryID);
             return View(article);
         }
 
         // GET: Articles/Delete/5
-        public ActionResult Delete(int? id )
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -113,7 +122,7 @@ namespace PostIT.Controllers
         // POST: Articles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id )
+        public ActionResult DeleteConfirmed(int id)
         {
             Article article = db.Articles.Find(id);
             db.Articles.Remove(article);
@@ -123,13 +132,10 @@ namespace PostIT.Controllers
 
         private void TagsDropDownList(object selectedCategory = null)
         {
-            Dictionary<int, string> DictionaryTags = new Dictionary<int, string>();
-            var ListTags = db.Tags.ToList();
-            foreach(var tag in ListTags)
-            {
-                DictionaryTags.Add(tag.ID,tag.Name);
-            }
-            ViewBag.CategoryList = DictionaryTags;
+            var CategoryQuery = from d in db.Tags
+                                orderby d.Name
+                                select d;
+            ViewBag.CategoryID = new SelectList(CategoryQuery, "ID", "Name", selectedCategory);
         }
 
         protected override void Dispose(bool disposing)

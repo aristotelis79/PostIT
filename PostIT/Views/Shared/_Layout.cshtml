@@ -25,13 +25,11 @@
                     <li>@Html.ActionLink(PostIT.LocalResource.Resources.Contact, "Contact", "Home")</li>
                     <li>@Html.ActionLink(PostIT.LocalResource.Resources.Articles, "Index", "Articles")</li>
                 </ul>
-                <div class="nav navbar-nav navbar-right dropdown">
-                    <button class="btn btn-default dropdown-toggle .btn-block .btn-lg" type="button" data-toggle="dropdown">Languages
+                <div class="navbar-right dropdown">
+                    <button class="btn btn-default navbar-btn dropdown-toggle" type="button" data-toggle="dropdown">Languages
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        @*<li>Html.ActionLink("English", ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), new { language = "en-US" }, null)</li>
-                        <li>Html.ActionLink("Greek", ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), new { language = "el-GR" }, null)</li>*@
                         <li>@Html.ActionLink("English", "ChangeLanguage", ViewContext.RouteData.Values["controller"].ToString(), new { language = "en-US", redirectUrl = HttpContext.Current.Request.Url.AbsolutePath }, null)</li>
                         <li>@Html.ActionLink("Greek", "ChangeLanguage", ViewContext.RouteData.Values["controller"].ToString(), new { language = "el-GR", redirectUrl = HttpContext.Current.Request.Url.AbsolutePath }, null)</li>
                     </ul>

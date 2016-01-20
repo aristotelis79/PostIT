@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PostIT.Models
 {
@@ -32,12 +30,11 @@ namespace PostIT.Models
         public DateTime? Modified { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)] 
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? Published { get; set; }
 
         public int CategoryID { get; set; }
 
-        [Required]
         public virtual Tag Category { get; set; }
 
         //public virtual ICollection<Tag> Tags { get; set; }

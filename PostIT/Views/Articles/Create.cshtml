@@ -6,11 +6,10 @@
 
 <h2>Create</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Article</h4>
         <hr />
@@ -51,8 +50,7 @@
             @*@Html.LabelForModel(PostIT.LocalResource.Resources.Category, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-2" for="CategoryID">@Html.LabelForModel(PostIT.LocalResource.Resources.Category)</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Category.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.DropDownList("CategoryID", String.Empty)*@
+                @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
             </div>
         </div>

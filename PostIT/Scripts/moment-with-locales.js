@@ -534,7 +534,6 @@
     // includes scottish gaelic two word and hyphenated months
     var matchWord = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i;
 
-
     var regexes = {};
 
     function addRegexToken (token, regex, strictRegex) {
@@ -1328,7 +1327,6 @@
         configFromArray(config);
         checkOverflow(config);
     }
-
 
     function meridiemFixWrap (locale, hour, meridiem) {
         var isPm;
@@ -2774,7 +2772,6 @@
         }
     }
 
-
     // MOMENTS
 
     // Setting the hour should keep the time, because the user explicitly
@@ -2848,7 +2845,6 @@
     addFormatToken(0, ['SSSSSSSSS', 9], 0, function () {
         return this.millisecond() * 1000000;
     });
-
 
     // ALIASES
 
@@ -3480,7 +3476,6 @@
         // 12 months -> 1 year
         years  = absFloor(months / 12);
         months %= 12;
-
 
         // inspired by https://github.com/dordille/moment-isoduration/blob/master/moment.isoduration.js
         var Y = years;
@@ -5259,7 +5254,6 @@
         weekdaysShort : dv__weekdays,
         weekdaysMin : 'އާދި_ހޯމަ_އަން_ބުދަ_ބުރާ_ހުކު_ހޮނި'.split('_'),
         longDateFormat : {
-
             LT : 'HH:mm',
             LTS : 'HH:mm:ss',
             L : 'D/M/YYYY',
@@ -9292,7 +9286,6 @@
     //! locale : Northern Sami (se)
     //! authors : Bård Rolstad Henriksen : https://github.com/karamell
 
-
     var se = moment__default.defineLocale('se', {
         months : 'ođđajagemánnu_guovvamánnu_njukčamánnu_cuoŋománnu_miessemánnu_geassemánnu_suoidnemánnu_borgemánnu_čakčamánnu_golggotmánnu_skábmamánnu_juovlamánnu'.split('_'),
         monthsShort : 'ođđj_guov_njuk_cuo_mies_geas_suoi_borg_čakč_golg_skáb_juov'.split('_'),
@@ -10527,7 +10520,6 @@
     //! locale : talossan (tzl)
     //! author : Robin van der Vliet : https://github.com/robin0van0der0v with the help of Iustì Canun
 
-
     // After the year there should be a slash and the amount of years since December 26, 1979 in Roman numerals.
     // This is currently too difficult (maybe even impossible) to add.
     var tzl = moment__default.defineLocale('tzl', {
@@ -11140,5 +11132,4 @@
     moment_with_locales.locale('en');
 
     return moment_with_locales;
-
 }));
