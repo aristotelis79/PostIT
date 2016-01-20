@@ -22,8 +22,8 @@ namespace PostIT.DAL
 
             var articles = new List<Article>
             {
-                new Article {Title = "Title 1",Content = "Content 1________", ShortDescription = "Short Description 1", Created = DateTime.Parse("20-01-2016"), Modified = DateTime.Parse("20-01-2016"), Published = DateTime.Parse("20-01-2016"), Category = tags.Single(i => i.Name == "Politics").ID },
-                new Article {Title = "Title 2",Content = "Content 2________", ShortDescription = "Short Description 2", Created = DateTime.Parse("20-01-2016"), Modified = DateTime.Parse("20-01-2016"), Published = DateTime.Parse("20-01-2016"), Category = tags.Single(i => i.Name == "Sports").ID },
+                new Article {Title = "Title 1",Content = "Content 1________", ShortDescription = "Short Description 1", Created = DateTime.Parse("20-01-2016"), Modified = DateTime.Parse("20-01-2016"), Published = DateTime.Parse("20-01-2016"), CategoryID = 1 },
+                new Article {Title = "Title 2",Content = "Content 2________", ShortDescription = "Short Description 2", Created = DateTime.Parse("20-01-2016"), Modified = DateTime.Parse("20-01-2016"), Published = DateTime.Parse("20-01-2016"), CategoryID = 2 },
             };
             articles.ForEach(s => context.Articles.Add(s));
             context.SaveChanges();

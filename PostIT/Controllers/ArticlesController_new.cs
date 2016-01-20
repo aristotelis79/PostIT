@@ -10,10 +10,11 @@ using PostIT.DAL;
 using PostIT.Models;
 using System.Threading;
 using System.Globalization;
+using System.Data.Entity.Infrastructure;
 
 namespace PostIT.Controllers
 {
-    public class ArticlesController : BaseController
+    public class ArticlesController_new : BaseController
     {
         private ArcticleContext db = new ArcticleContext();
 
@@ -41,6 +42,7 @@ namespace PostIT.Controllers
         // GET: Articles/Create
         public ActionResult Create()
         {
+            TagsDropDownList();
             return View();
         }
 
@@ -51,14 +53,22 @@ namespace PostIT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Title,Content,ShortDescription,Created,Modified,Published,Category")] Article article )
         {
-            if (ModelState.IsValid)
-            {
-                article.Created = DateTime.Now;
-                db.Articles.Add(article);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            try
+            { 
+                if (ModelState.IsValid)
+                {
+                    article.Created = DateTime.Now;
+                    db.Articles.Add(article);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.)
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
+            TagsDropDownList(article.CategoryID);
             return View(article);
         }
 
@@ -74,25 +84,48 @@ namespace PostIT.Controllers
             {
                 return HttpNotFound();
             }
-            TagsDropDownList(db.Tags.Find(id).ID);
+            TagsDropDownList(article.CategoryID);
             return View(article);
         }
 
         // POST: Articles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Content,ShortDescription,Created,Modified,Published,Category")] Article article )
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                article.Modified = DateTime.Now;
-                db.Entry(article).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(article);
+            var articleToUpdate = db.Articles.Find(id);
+            if (TryUpdateModel(articleToUpdate, "",
+               new string[] { "Title", "Content", "ShortDescription", "Created", "Modified", "Published", "CategoryID" }))
+            {
+                try
+                {
+                    Article article = db.Articles.Find(id);
+                    article.Modified = DateTime.Now;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            TagsDropDownList(articleToUpdate.CategoryID);
+            return View(articleToUpdate);
+        }
+
+        private void TagsDropDownList(object selectedTag = null)
+        {
+            var TagsQuery = from d in db.Tags
+                                   orderby d.Name
+                                   select d;
+            ViewBag.CategoryID = new SelectList(TagsQuery, "CategoryID", "Name", selectedTag);
         }
 
         // GET: Articles/Delete/5
@@ -119,17 +152,6 @@ namespace PostIT.Controllers
             db.Articles.Remove(article);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        private void TagsDropDownList(object selectedCategory = null)
-        {
-            Dictionary<int, string> DictionaryTags = new Dictionary<int, string>();
-            var ListTags = db.Tags.ToList();
-            foreach(var tag in ListTags)
-            {
-                DictionaryTags.Add(tag.ID,tag.Name);
-            }
-            ViewBag.CategoryList = DictionaryTags;
         }
 
         protected override void Dispose(bool disposing)

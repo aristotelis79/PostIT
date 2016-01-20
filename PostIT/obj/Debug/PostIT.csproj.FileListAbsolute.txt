@@ -61,4 +61,5 @@ C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Deb
 C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\el-GR\PostIT.resources.dll
 C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\PostIT.dll
 C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\PostIT.pdb
+C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\PostIT.Migrations.init.resources
 C:\Users\Aristotelis\documents\visual studio 2015\Projects\PostIT\PostIT\obj\Debug\PostIT.csprojResolveAssemblyReference.cache
