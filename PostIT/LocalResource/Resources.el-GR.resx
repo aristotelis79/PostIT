@@ -177,6 +177,9 @@
   <data name="NewTag" xml:space="preserve">
     <value>Νέα Κατηγορία</value>
   </data>
+  <data name="Picture" xml:space="preserve">
+    <value>Εικόνα</value>
+  </data>
   <data name="Published" xml:space="preserve">
     <value>Δημοσιευθηκε</value>
   </data>

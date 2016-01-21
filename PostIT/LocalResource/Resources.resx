@@ -177,6 +177,9 @@
   <data name="NewTag" xml:space="preserve">
     <value>New Tag</value>
   </data>
+  <data name="Picture" xml:space="preserve">
+    <value>Picture</value>
+  </data>
   <data name="Published" xml:space="preserve">
     <value>Published</value>
   </data>

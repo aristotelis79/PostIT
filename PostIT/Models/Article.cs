@@ -37,6 +37,8 @@ namespace PostIT.Models
 
         public virtual Tag Category { get; set; }
 
-        //public virtual ICollection<Tag> Tags { get; set; }
+        public int? FilePathID { get; set; }
+
+        public virtual FilePath FilePath { get; set; }
     }
 }

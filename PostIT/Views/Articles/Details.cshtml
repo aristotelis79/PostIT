@@ -65,6 +65,16 @@
         <dd>
             @Html.DisplayFor(model => model.Category.Name)
         </dd>
+
+        <dt>
+            @Html.DisplayName(PostIT.LocalResource.Resources.Picture)
+        </dt>
+        @if (Model.FilePath != null)
+        {
+        <dd>
+            <img src="@Url.Action("UploadImage", "Base", new { imageName = Model.FilePath.FileName })" class="fix-width-image" alt="" />
+        </dd>
+        }
     </dl>
 </div>
 <p>

@@ -12,11 +12,11 @@ namespace PostIT.DAL
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<FilePath> FilePaths { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            // modelBuilder.Entity<Article>().HasMany(c => c.Tags).WithMany(i => i.Articles).Map(t => t.MapLeftKey("ArticleID").MapRightKey("TagID").ToTable("ArticleTag"));
         }
     }
 }

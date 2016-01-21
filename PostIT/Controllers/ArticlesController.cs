@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace PostIT.Controllers
@@ -46,10 +47,11 @@ namespace PostIT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Content,ShortDescription,Created,Modified,Published,CategoryID")] Article article)
+        public ActionResult Create([Bind(Include = "ID,Title,Content,ShortDescription,Created,Modified,Published,CategoryID")] Article article, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                article = SaveImageIfExist(article, upload);
                 article.Created = DateTime.Now;
                 db.Articles.Add(article);
                 db.SaveChanges();
@@ -80,18 +82,19 @@ namespace PostIT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? id)
+        public ActionResult EditPost(int? id, HttpPostedFileBase upload)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var article = db.Articles.Find(id);
-            if (TryUpdateModel(article, "", new string[] { "Title", "Content", "ShortDescription", "Created", "Modified", "Published", "CategoryID" }))
+            if (TryUpdateModel(article, "", new string[] { "Title", "Content", "ShortDescription", "Created", "Modified", "Published", "CategoryID", "FilePathID" }))
             {
                 try
                 {
                     article.Modified = DateTime.Now;
+                    article = SaveImageIfExist(article, upload);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -125,6 +128,12 @@ namespace PostIT.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Article article = db.Articles.Find(id);
+            FilePath image = new FilePath();
+            if (article.FilePathID != null)
+            {
+                image = db.FilePaths.Find(article.FilePathID);
+                db.FilePaths.Remove(image);
+            }
             db.Articles.Remove(article);
             db.SaveChanges();
             return RedirectToAction("Index");
