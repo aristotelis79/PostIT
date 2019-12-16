@@ -1,9 +1,3 @@
-# Example of a `.gitattributes` file which reclassifies `.rb` files as Java:
-*.cs linguist-language=C#
-
-# Replace any whitespace in the language name with hyphens:
-*.glyphs linguist-language=OpenStep-Property-List
-
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
@@ -67,3 +61,6 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+# Example of a `.gitattributes` file which reclassifies `.rb` files as Java:
+*.cs linguist-language=C#
